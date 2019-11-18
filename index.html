@@ -3,27 +3,64 @@
         <script src="lsystems.js"></script>
     </head>
 
+    <style>
+      body {
+        background-color: #333;
+      }
+      #canvas {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+
     <body>
-        <canvas id="canvas" width=1200 height=800></canvas>
+        <canvas id="canvas"></canvas>
     </body>
 
     <script>
 
+      const dpiFix = (canvas,ctx) => {
+        let dpi = window.devicePixelRatio;
+        let style_height = +getComputedStyle(canvas).getPropertyValue("height").slice(0, -2);
+        let style_width = +getComputedStyle(canvas).getPropertyValue("width").slice(0, -2);
+        canvas.setAttribute('height', style_height * dpi);
+        canvas.setAttribute('width', style_width * dpi);
+      }
+
       document.addEventListener("DOMContentLoaded", function(){
 
-      	var canvas1 = document.getElementById("canvas");
+        let canv = document.getElementById("canvas");
+        let ctx  = canv.getContext('2d');
 
-      	var data, system, renderer, canvas1, ii, kk;
-        console.log(lsystems);
+        dpiFix(canv, ctx);
 
-        system = (new lsystems.LSystemGenerator).dragonCurve();
-        system.stepn(8);
-        renderCfg = {
-          system : system,
-          canvas : canvas
+        let system = (new lsystems.Generator).dragonCurve();
+        system.stepn(10);
+
+        renderConfig = {
+          locX: canv.width/2,
+          locY: canv.height/2,
+          canvasContext: ctx,
+          stepLength: 5,
+          renderWindow: 50,
+          instructions: system.instructions,
+          color: "#FF0000",
         }
-        renderer = new lsystems.LSystemRenderer(renderCfg);
-        renderer.draw();
+
+        let renderer = new lsystems.TraceRenderer(renderConfig);
+        laggingRenderer = new lsystems.TraceRenderer({
+          ...renderConfig,
+          color: "#333",
+          currentIndex: 5
+        });
+
+        let lag = 50;
+
+        window.setInterval(() => {
+          ctx.clearRect(0, 0, canv.width, canv.height);
+          renderer.renderOnce();
+          // laggingRenderer.renderOnce();
+        }, 20)
 
       });
 

@@ -1,8 +1,6 @@
 import { expect, assert } from 'chai';
-// if you used the '@types/mocha' method to install mocha type definitions, uncomment the following line
 import 'mocha';
-
-import {LSystem, LSystemRenderer} from "../LSystem";
+import {LSystem, Renderer} from "../main";
 
 
 describe("LSystem Test", () => {
@@ -35,19 +33,3 @@ describe("LSystem Test", () => {
       console.log("length: ", ls.instructions.length);
     });
 });
-
-
-describe("LSystemRenderer Test", () => {
-  it("lets us set props that already exist", () => {
-    var config = {
-      fakeProp : "dfaskljdfaskljdfsa",
-      lineColor : "very unique string"
-    }
-    var lrender = new LSystemRenderer(config);
-    assert.equal(lrender.lineColor, config.lineColor);
-    //the following won't even run because typescript:
-    //assert.equal(lrender.fakeProp, undefined);
-
-  })
-
-})

@@ -1,7 +1,7 @@
 {
-  "name": "ts-boilerplate",
-  "version": "1.0.0",
-  "description": "Boilerplate typescript",
+  "name": "l-systems",
+  "version": "2.0.0",
+  "description": "A small library for creating, running, and rendering l-systems",
   "main": "main.js",
   "scripts": {
     "start": "node dist/main.js",
@@ -16,7 +16,7 @@
     "@types/mocha": "^2.2.41",
     "awesome-typescript-loader": "^3.2.1",
     "chai": "^4.0.2",
-    "mocha": "^3.4.2",
+    "mocha": "^3.5.3",
     "typescript": "^2.4.2",
     "webpack": "^3.3.0"
   },
