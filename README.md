@@ -2,7 +2,7 @@
 
 A little library for creating and rendering L-Systems. It's a pretty old project.
 
-To compile, just `npm install` followed by `npm run build`. This should create compile to lsystems.js in the root.
+To compile, just `npm install` followed by `npm run build`. This should create an lsystems.js in the root.
 
 There are also a couple basic tests in `src/tests`
 
